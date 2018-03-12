@@ -39,15 +39,14 @@ public class FullProfile extends AppCompatActivity {
 
         mFirebaseDbReferenceUserChild = FirebaseDatabase.getInstance().getReference("Student_Details_Database");
         mFirebaseDbReferenceCurrentUser= mFirebaseDbReferenceUserChild.child(mFirebaseUser.getUid());
-   */
-/* }
+ }
     public  void button(View view)
     {
         loadUserInformation();
 
 
     }
-    public void loadUserInformation () {*//*
+    public void loadUserInformation () {
 
    mFirebaseDbReferenceCurrentUser.addValueEventListener(new ValueEventListener() {
        @Override
@@ -67,8 +66,7 @@ public class FullProfile extends AppCompatActivity {
 
        }
    });
-       */
-/* mFirebaseDbReferenceCurrentUser.addValueEventListener(new ValueEventListener() {
+ mFirebaseDbReferenceCurrentUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -88,7 +86,7 @@ public class FullProfile extends AppCompatActivity {
 
 
 
-*//*
+
 
 
     }
