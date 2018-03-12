@@ -1,4 +1,3 @@
-/*
 package com.example.moonlight.firebasefullproject;
 
 import android.support.v7.app.AppCompatActivity;
@@ -57,7 +56,7 @@ public class ProfileActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.imageView);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
         textView = (TextView) findViewById(R.id.textViewVerified);
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,18 +76,17 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
-    */
-/*@Override
+    @Override
     protected void onStart() {
         super.onStart();
         if (mAuth.getCurrentUser() == null) {
             finish();
             startActivity(new Intent(this, MainActivity.class));
         }
-    }*//*
+    }
 
 
-   private void loadUserInformation() {
+    private void loadUserInformation() {
         final FirebaseUser user = mAuth.getCurrentUser();
 
         if (user != null) {
@@ -195,8 +193,8 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    */
-/*@Override
+/*
+@Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
@@ -219,13 +217,14 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         return true;
-    }*//*
+    }
+*/
+
 
 
     private void showImageChooser() {
         Intent intent = new Intent();
-        intent.setType("image*/
-/*");
+        intent.setType("image");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Profile Image"), CHOOSE_IMAGE);
     }
@@ -235,4 +234,3 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 }
-*/
