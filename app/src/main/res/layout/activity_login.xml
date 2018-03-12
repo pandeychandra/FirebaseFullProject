@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/email_login"
+        android:layout_width="371dp"
+        android:layout_height="43dp"
+        android:layout_marginRight="8dp"
+        android:ems="10"
+        android:hint="ENter your Email Adderss"
+        android:inputType="textPersonName"
+
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="-2dp" />
+
+    <EditText
+        android:id="@+id/password_login"
+        android:layout_width="366dp"
+        android:layout_height="49dp"
+        android:ems="10"
+        android:hint="Enter your Password"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="60dp" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="login"
+        tools:layout_editor_absoluteX="102dp"
+        tools:layout_editor_absoluteY="131dp" />
+    <Button
+        android:onClick="sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="signup"
+        tools:layout_editor_absoluteX="102dp"
+        tools:layout_editor_absoluteY="131dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="post"
+        android:id="@+id/post"/>
+</LinearLayout>

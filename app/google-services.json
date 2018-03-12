@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "926035371472",
+    "firebase_url": "https://hospitaldemo-5ce02.firebaseio.com",
+    "project_id": "hospitaldemo-5ce02",
+    "storage_bucket": "hospitaldemo-5ce02.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926035371472:android:33d65bb58b9ea49d",
+        "android_client_info": {
+          "package_name": "com.example.moonlight.hospitaldemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "926035371472-unhqvehsh1k8s3kpvo89rciumv650id9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.moonlight.hospitaldemo",
+            "certificate_hash": "e0e0dcc51a862185597311ed73634d22cfd3d5b5"
+          }
+        },
+        {
+          "client_id": "926035371472-ul646k05shk4eg2i5mdbns3sa2c25f2h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOBe-R0bACevbJswH86okgRSEB6LOaRu0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "926035371472-ul646k05shk4eg2i5mdbns3sa2c25f2h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926035371472:android:be389aa9829ce942",
+        "android_client_info": {
+          "package_name": "com.example.moonlight.firebasefullproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "926035371472-852g7kmoin5drinkb6r8qpf29sb7vmq2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.moonlight.firebasefullproject",
+            "certificate_hash": "e0e0dcc51a862185597311ed73634d22cfd3d5b5"
+          }
+        },
+        {
+          "client_id": "926035371472-ul646k05shk4eg2i5mdbns3sa2c25f2h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOBe-R0bACevbJswH86okgRSEB6LOaRu0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "926035371472-ul646k05shk4eg2i5mdbns3sa2c25f2h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
