@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity
                   // String  studentDetails = (String) dataSnapshot.getValue("location").toString();
                     String  na = String.valueOf(dataSnapshot.child("location").getValue());
                     String  nphn = String.valueOf(dataSnapshot.child("location").getValue());
-                    String   = String.valueOf(dataSnapshot.child("location").getValue());
+                    String   hh= String.valueOf(dataSnapshot.child("location").getValue());
 
                     //list.add(studentDetails);
                 }
