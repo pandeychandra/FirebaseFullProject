@@ -92,17 +92,24 @@ public class MainActivity extends AppCompatActivity
 
 
         firebaseAuth = FirebaseAuth.getInstance();
-        mRef = FirebaseDatabase.getInstance().getReference("Student_Details_Database");
-        databaseReference = FirebaseDatabase.getInstance().getReference(Database_Path);
+        String currentUserID = firebaseAuth.getInstance().getCurrentUser().getUid();
+        String b=currentUserID+"he";
+
+       // mRef = FirebaseDatabase.getInstance().getReference("Student_Details_Database").child(currentUserID+"he");
+        databaseReference = FirebaseDatabase.getInstance().getReference(Database_Path).child(currentUserID).child(currentUserID+"he");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
-                    StudentDetails studentDetails = dataSnapshot.getValue(StudentDetails.class);
 
-                    list.add(studentDetails);
+                  // String  studentDetails = (String) dataSnapshot.getValue("location").toString();
+                    String  na = String.valueOf(dataSnapshot.child("location").getValue());
+                    String  nphn = String.valueOf(dataSnapshot.child("location").getValue());
+                    String   = String.valueOf(dataSnapshot.child("location").getValue());
+
+                    //list.add(studentDetails);
                 }
 
                 adapter = new RecyclerViewAdapter(MainActivity.this, list);
@@ -122,6 +129,7 @@ public class MainActivity extends AppCompatActivity
         //loadUserInformation();
 
 
+
         View header = navigationView.getHeaderView(0);
         email = (TextView) header.findViewById(R.id.nameFirst);
         nameFir = (TextView) header.findViewById(R.id.emailFirst);
@@ -136,6 +144,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 if(firebaseAuth.getCurrentUser() != null){
+                    Intent i=new Intent(MainActivity.this,PostEventActivity.class);
+                    startActivity(i);
                     Toast.makeText(getApplicationContext(), " user profile", Toast.LENGTH_SHORT).show();
                    ;
                 }else {
@@ -152,51 +162,25 @@ public class MainActivity extends AppCompatActivity
 
 
     public void loadUserInformation() {
-      /*  databaseReference.addValueEventListener(new ValueEventListener() {
+
+
+
+
+
+       final String currentUserID = firebaseAuth.getInstance().getCurrentUser().getUid();
+
+        newRef = databaseReference.child(currentUserID);
+        newRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     try {
                       //String carid = dataSnapshot.child("Student_Details_Database").child(currentUserID).child("location").getValue(String.class);
-                       // String userDetails = dataSnapshot.getValue().toString();
-                        String  na = String.valueOf(dataSnapshot.child("location").getValue());
-
-                        email.setText(na);
-
-                    }catch (Exception e)
-                    {
-                        e.printStackTrace();
-                    }
-
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
-
-
-
-       final String currentUserID = firebaseAuth.getInstance().getCurrentUser().getUid();
-            //  newRef = databaseReference.child(currentUserID);
-        FirebaseUser mFirebaseUser = firebaseAuth.getCurrentUser();
-        newRef = databaseReference.child(currentUserID);
-        newRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    try {
-                      String carid = dataSnapshot.child("Student_Details_Database").child(currentUserID).child("location").getValue(String.class);
                         String userDetails = dataSnapshot.getValue().toString();
-                       //String  na = String.valueOf(dataSnapshot.child("location").getValue());
+                       String  na = String.valueOf(dataSnapshot.child("location").getValue());
 
-                        email.setText(userDetails);
+                        //email.setText(na);
 
                     }catch (Exception e)
                     {
@@ -223,6 +207,7 @@ public class MainActivity extends AppCompatActivity
     protected void onStart() {
         super.onStart();
         if(firebaseAuth.getCurrentUser() != null){
+            email.setText(firebaseAuth.getCurrentUser().getEmail().toString());
            loadUserInformation();
         }else {
        Toast.makeText(getApplicationContext(), "Plz login to set user profile", Toast.LENGTH_SHORT).show();
