@@ -1,5 +1,6 @@
 package com.example.moonlight.firebasefullproject;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -15,6 +18,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -35,6 +39,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -51,6 +56,13 @@ public class MainActivity extends AppCompatActivity
     // Root Database Name for Firebase Database.
     public static final String Database_Path = "Student_Details_Database";
     private DatabaseReference mRef;
+    FloatingActionButton button;
+    List<StudentDetails> list = new ArrayList<>();
+
+    RecyclerView recyclerView;
+
+    RecyclerView.Adapter adapter ;
+    ProgressDialog progressDialog;
 
 
     @Override
@@ -60,15 +72,62 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         name = getIntent().getStringExtra("name");
+
         phone = getIntent().getStringExtra("phone");
         adress = getIntent().getStringExtra("location");
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        button=(FloatingActionButton)findViewById(R.id.fab);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        recyclerView.setHasFixedSize(true);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+
+        progressDialog = new ProgressDialog(MainActivity.this);
+
+        progressDialog.setMessage("Loading Data from Firebase Database");
+
+        progressDialog.show();
+
 
         firebaseAuth = FirebaseAuth.getInstance();
-        mRef = FirebaseDatabase.getInstance().getReference("Student_Details_Database");
-        databaseReference = FirebaseDatabase.getInstance().getReference(Database_Path);
+        String currentUserID = firebaseAuth.getInstance().getCurrentUser().getUid();
+        String b=currentUserID+"he";
+
+       // mRef = FirebaseDatabase.getInstance().getReference("Student_Details_Database").child(currentUserID+"he");
+        databaseReference = FirebaseDatabase.getInstance().getReference(Database_Path).child(currentUserID).child(currentUserID+"he");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+
+
+                  // String  studentDetails = (String) dataSnapshot.getValue("location").toString();
+                    String  na = String.valueOf(dataSnapshot.child("location").getValue());
+                    String  nphn = String.valueOf(dataSnapshot.child("location").getValue());
+                    String   = String.valueOf(dataSnapshot.child("location").getValue());
+
+                    //list.add(studentDetails);
+                }
+
+                adapter = new RecyclerViewAdapter(MainActivity.this, list);
+
+                recyclerView.setAdapter(adapter);
+
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+                progressDialog.dismiss();
+
+            }
+        });
         //loadUserInformation();
+
 
 
         View header = navigationView.getHeaderView(0);
@@ -81,56 +140,47 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(firebaseAuth.getCurrentUser() != null){
+                    Intent i=new Intent(MainActivity.this,PostEventActivity.class);
+                    startActivity(i);
+                    Toast.makeText(getApplicationContext(), " user profile", Toast.LENGTH_SHORT).show();
+                   ;
+                }else {
+                    Intent i=new Intent(MainActivity.this,LoginActivity.class);
+                    startActivity(i);
+                    //Toast.makeText(getApplicationContext(), "Plz login to set user profile", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
 
     }
 
+
     public void loadUserInformation() {
-      /*  databaseReference.addValueEventListener(new ValueEventListener() {
+
+
+
+
+
+       final String currentUserID = firebaseAuth.getInstance().getCurrentUser().getUid();
+
+        newRef = databaseReference.child(currentUserID);
+        newRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     try {
                       //String carid = dataSnapshot.child("Student_Details_Database").child(currentUserID).child("location").getValue(String.class);
-                       // String userDetails = dataSnapshot.getValue().toString();
-                        String  na = String.valueOf(dataSnapshot.child("location").getValue());
-
-                        email.setText(na);
-
-                    }catch (Exception e)
-                    {
-                        e.printStackTrace();
-                    }
-
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
-
-
-
-       final String currentUserID = firebaseAuth.getInstance().getCurrentUser().getUid();
-            //  newRef = databaseReference.child(currentUserID);
-        FirebaseUser mFirebaseUser = firebaseAuth.getCurrentUser();
-        newRef = databaseReference.child(currentUserID);
-        newRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    try {
-                      String carid = dataSnapshot.child("Student_Details_Database").child(currentUserID).child("location").getValue(String.class);
                         String userDetails = dataSnapshot.getValue().toString();
-                       //String  na = String.valueOf(dataSnapshot.child("location").getValue());
+                       String  na = String.valueOf(dataSnapshot.child("location").getValue());
 
-                        email.setText(userDetails);
+                        //email.setText(na);
 
                     }catch (Exception e)
                     {
@@ -153,16 +203,11 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        public  void click(View view)
-    {
-        Intent i=new Intent(MainActivity.this,LoginActivity.class);
-        startActivity(i);
-
-    }
     @Override
     protected void onStart() {
         super.onStart();
         if(firebaseAuth.getCurrentUser() != null){
+            email.setText(firebaseAuth.getCurrentUser().getEmail().toString());
            loadUserInformation();
         }else {
        Toast.makeText(getApplicationContext(), "Plz login to set user profile", Toast.LENGTH_SHORT).show();
@@ -210,6 +255,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
+            firebaseAuth.signOut();
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -225,11 +271,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public  void phone(View view)
-    {
-        Intent i=new Intent(MainActivity.this,LoginActivity.class);
-        startActivity(i);
 
-    }
 
 }
